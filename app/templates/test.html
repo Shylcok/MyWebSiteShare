@@ -1,0 +1,84 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block head %}
+    {{ super() }}
+    <link rel="shortcut icon" href="{{ url_for('static',filename = 'img/favicon.ico') }}" type="image/x-ico">
+    <link rel="icon" href="{{ url_for('static',filename = 'img/favicon.ico') }}" type="image/x-ico">
+{% endblock %}
+{% block scripts %}
+    {{ super() }}
+
+
+{% endblock %}
+
+{% block title %}神秘实验室 - 分享你一个世界{% endblock %}
+{% block navbar %}
+    <div class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle"
+                        data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ url_for('main.page_index') }}">平行世界</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url_for('main.page_home') }}">个人介绍</a></li>
+                    <li><a href="{{ url_for('todo.page_todo_show') }}">TODO</a></li>
+                    <li><a href="{{ url_for('main.page_test') }}">神奇实验室</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if current_user.is_authenticated %}
+                        <li><a href="{{ url_for('auth.logout') }}">退出平行世界（贤者模式）</a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('auth.login') }}">进入平行世界（如果你有PY码的话）</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block content %}
+
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-info">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <div class="container">
+        {% block page_content %}
+            <div class="page-header">
+
+                <h1>欢迎来到神秘实验室！</h1>
+                <p href="#">ajax-test</p>
+
+            </div>
+        {% endblock %}
+    </div>
+
+
+    <footer class="navbar-fixed-bottom">
+        <div class="container">
+            <div class="copyright" style="text-align: center">
+                &copy; 2019&nbsp;JYFelt ALL RIGHT RESERVED<br>
+                ICP:<a href="http://www.miitbeian.gov.cn/">陕ICP备19002533号-1</a>
+            </div>
+        </div>
+    </footer>
+
+{% endblock %}
+
+
+
+
+
+
+

@@ -1,0 +1,114 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% block head %}
+    {{ super() }}
+    <link rel="shortcut icon" href="{{ url_for('static',filename = 'img/favicon.ico') }}" type="image/x-ico">
+    <link rel="icon" href="{{ url_for('static',filename = 'img/favicon.ico') }}" type="image/x-ico">
+{% endblock %}
+{% block scripts %}
+    {{ super() }}
+    {{ moment.include_moment() }}
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/layer/2.2/layer.js"></script>
+    <script src="https://cdn.bootcss.com/layer/2.2/extend/layer.ext.js"></script>
+    <script src="{{ url_for('static',filename='js/moment-with-locales.js') }}"></script>
+    <script>
+        moment.locale("zh-cn");
+    </script>
+
+    <script>
+        function showQCode() {
+            layer.config({
+                extend: 'extend/layer.ext.js'
+            });
+            //页面一打开就执行，放入ready是为了layer所需配件（css、扩展模块）加载完毕
+            layer.ready(function () {
+                //QCode欢迎页
+                layer.open({
+                    type: 2,
+                    skin: 'layui-layer-lan',
+                    title: '扫描二维码，了解一个懒惰的人',
+                    fix: false,
+                    shadeClose: true,
+                    maxmin: true,
+                    area: ['840px', '600px'],
+                    content: "{{url_for('main.page_qcode')}}"
+                });
+                layer.msg('点我直接跳转哦！');
+            });
+        }
+    </script>
+{% endblock %}
+
+{% block title %}
+    分享平行世界
+{% endblock %}
+{% block navbar %}
+    <div class="navbar navbar-inverse" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle"
+                        data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="{{ url_for('main.page_index') }}">平行世界</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="{{ url_for('main.page_home') }}">个人介绍</a></li>
+                    <li><a href="{{ url_for('todo.page_todo_show') }}">TODO</a></li>
+                    <li><a href="{{ url_for('main.page_test') }}">神奇实验室</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    {% if current_user.is_authenticated %}
+                        <li><a href="{{ url_for('auth.logout') }}">退出平行世界（贤者模式）</a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('auth.login') }}">进入平行世界（如果你有PY码的话）</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block content %}
+
+    {% for message in get_flashed_messages() %}
+        <div class="alert alert-info">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <div class="container">
+        {% block page_content %}{% endblock %}
+    </div>
+
+    <footer class="navbar-static-bottom">
+        <div class="container">
+            <div class="timer">
+                <div class="alert alert-warning" style=" margin-left: 70%;">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    现在的时间是：{{ moment(current_time).format('LLL',refresh=True) }}<br>
+                    你于{{ moment(current_time).fromNow(refresh=True) }}访问这个页面<br>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <footer class="navbar-fixed-bottom">
+        <div class="container">
+            <div class="copyright" style="text-align: center">
+                &copy; 2019&nbsp;JYFelt ALL RIGHT RESERVED<br>
+                ICP:<a href="http://www.miitbeian.gov.cn/">陕ICP备19002533号-1</a>
+            </div>
+        </div>
+    </footer>
+
+{% endblock %}
+
+

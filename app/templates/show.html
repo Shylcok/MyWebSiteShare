@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}TODO LIST - 分享平行世界{% endblock %}
+{% block page_content %}
+    <div class="page-header">
+        <h1>待办列表</h1>
+        <tr class="text-danger">
+            <th class="text-center">id</th>
+            <th class="text-center">标题</th>
+            <th class="text-center">类别</th>
+            <th class="text-center">是否完成</th>
+            <th class="text-center">创建时间</th>
+        </tr>
+        <br>
+        {% for event in events %}
+            <tr class="text-center">
+                <td>{{ event.id }}</td>
+                <td>{{ event.title }}</td>
+                <td>{{ event.category }}</td>
+                <td>{{ event.create_time }}</td>
+                {% if not event.completion %}
+                    <td>未完成</td>
+                    <td>
+                        <button class="btn btn-info btn-sm">
+                            <a href="{{ url_for('todo.finish',id=event.id) }}">
+                                完成
+                            </a>
+                        </button>
+                    </td>
+                {% else %}
+                    <td>完成</td>
+                {% endif %}
+                <td>
+                    <button class="btn btn-info btn-sm">
+                        <a href="{{ url_for('todo.edit_event',id=event.id) }}">
+                            编辑
+                        </a>
+                    </button>
+                </td>
+                <td>
+                    <button class="btn btn-info btn-sm">
+                        <a href="{{ url_for('todo.delete_event',id=event.id) }}">
+                            删除
+                        </a>
+                    </button>
+                </td>
+            </tr>
+            <br>
+        {% endfor %}
+        <br>
+        <button class="btn btn-info btn-sm"><a
+                href="{{ url_for('todo.add_event') }}">添加事件</a></button>
+        <button class="btn btn-info btn-sm"><a
+                href="{{ url_for('todo.add_category') }}">添加类别</a></button>
+    </div>
+{% endblock %}

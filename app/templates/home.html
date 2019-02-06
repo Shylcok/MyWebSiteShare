@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}个人首页 - 分享你一个世界{% endblock %}
+
+{% block page_content %}
+    <div class="page-header">
+
+        <h1>
+            深入了解我？！
+        </h1>
+        <img src="{{ url_for('static',filename='img/enter_grey.png') }}" alt="点击了解我" onclick="showQCode()">
+
+    </div>
+
+
+{% endblock %}

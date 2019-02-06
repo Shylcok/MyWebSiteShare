@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}进入平行世界 - 分享你一个世界{% endblock %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>进入平行世界</h1>
+    </div>
+    <div class="col-md-4">
+        {{ wtf.quick_form(form) }}
+    </div>
+{% endblock %}

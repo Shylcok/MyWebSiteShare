@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>分享你一个世界</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/qcode.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static',filename = 'img/favicon.ico') }}" type="image/x-ico">
+    <link rel="icon" href="{{ url_for('static',filename = 'img/favicon.ico') }}" type="image/x-ico">
+</head>
+<body>
+<div class="container">
+    <div class="QCode">
+        <a href="https://blog.csdn.net/weixin_38034182/" target="_blank"><img
+                src="{{ url_for('static',filename='img/qcode.png') }}" alt="懒惰的大门"></a>
+        <a href="https://github.com/Shylcok" target="_blank"><img
+                src="{{ url_for('static',filename='img/qcode_github.png') }}" alt="懒惰的大门"></a>
+    </div>
+</div>
+</body>
+</html>
