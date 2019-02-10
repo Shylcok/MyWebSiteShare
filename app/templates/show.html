@@ -1,38 +1,8 @@
 {% extends "base.html" %}
 {% block head %}
     {{ super() }}
-    <style type="text/css">
-        table.hover-table {
-            font-family: verdana, arial, sans-serif;
-            font-size: 11px;
-            color: #333333;
-            border-width: 1px;
-            border-color: #999999;
-            border-collapse: collapse;
-        }
-
-        table.hover-table th {
-            background-color: #c3dde0;
-            border-width: 1px;
-            padding: 8px;
-            border-style: solid;
-            border-color: #a9c6c9;
-        }
-
-        table.hover-table tr {
-            background-color: #d4e3e5;
-        }
-
-        table.hover-table td {
-            border-width: 1px;
-            padding: 8px;
-            border-style: solid;
-            border-color: #a9c6c9;
-        }
-    </style>
+    <link href="{{ url_for('static',filename='css/show.css') }}" rel="stylesheet">
 {% endblock %}
-
-
 
 {% block title %}TODO LIST - 分享平行世界{% endblock %}
 {% block page_content %}
