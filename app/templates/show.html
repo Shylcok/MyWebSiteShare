@@ -2,7 +2,7 @@
 {% block head %}
     {{ super() }}
     <style type="text/css">
-        table.hovertable {
+        table.hover-table {
             font-family: verdana, arial, sans-serif;
             font-size: 11px;
             color: #333333;
@@ -11,7 +11,7 @@
             border-collapse: collapse;
         }
 
-        table.hovertable th {
+        table.hover-table th {
             background-color: #c3dde0;
             border-width: 1px;
             padding: 8px;
@@ -19,11 +19,11 @@
             border-color: #a9c6c9;
         }
 
-        table.hovertable tr {
+        table.hover-table tr {
             background-color: #d4e3e5;
         }
 
-        table.hovertable td {
+        table.hover-table td {
             border-width: 1px;
             padding: 8px;
             border-style: solid;
@@ -38,7 +38,7 @@
 {% block page_content %}
     <div class="page-header">
         <h1>待办列表</h1>
-        <table class="hovertable">
+        <table class="hover-table">
             <tr>
                 <th>id</th>
                 <th>标题</th>
